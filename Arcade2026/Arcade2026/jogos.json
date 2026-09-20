@@ -1,0 +1,48 @@
+{
+  "titulo": "ARCADE 2026",
+  "descobrir_automaticamente": true,
+  "pasta_jogos": "jogos",
+
+  "jogos": [
+    {
+      "id": "dark_neon",
+      "nome": "Dark Neon - Omega",
+      "descricao": "Sobreviva aos inimigos neon. WASD move, clique atira, ESC sai.",
+      "pasta": "jogos/dark_neon",
+      "entrada": "main2.py",
+      "icone": "icones/dark_neon.png",
+      "cor": "#b400ff",
+      "pontuacao": { "arquivo": "ranking.txt", "formato": "tempo_kills", "unidade": "kills" }
+    },
+    {
+      "id": "corrida",
+      "nome": "Corrida Infinita",
+      "descricao": "Desvie dos carros e rode o máximo de Km. Use as setas esquerda e direita.",
+      "pasta": "jogos/corrida",
+      "entrada": "jogo_ranking.py",
+      "icone": "icones/corrida.png",
+      "cor": "#3fa0ff",
+      "pontuacao": { "arquivo": "ranking.txt", "formato": "nome;pontos", "unidade": "Km" }
+    },
+    {
+      "id": "elf_dog",
+      "nome": "Elf Dog Jump",
+      "descricao": "Salte entre as plataformas e faça a maior pontuação. Setas esquerda e direita.",
+      "pasta": "jogos/elf_dog",
+      "entrada": "main.py",
+      "icone": "icones/elf_dog.png",
+      "cor": "#39e07a",
+      "pontuacao": { "arquivo": "ranking.txt", "formato": "nome;pontos", "unidade": "pts" }
+    },
+    {
+      "id": "breakout",
+      "nome": "Breakout Arcade",
+      "descricao": "Quebre os blocos com a bola. Poderes, 3 vidas e dificuldade fácil ou difícil.",
+      "pasta": "jogos/breakout",
+      "entrada": "main.py",
+      "icone": "icones/breakout.png",
+      "cor": "#ffb020",
+      "pontuacao": { "arquivo": "ranking.txt", "formato": "nome;pontos", "unidade": "pts" }
+    }
+  ]
+}

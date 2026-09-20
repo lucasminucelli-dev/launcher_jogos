@@ -1,0 +1,30 @@
+Nome do jogo: breakout
+tipo : Arcade
+
+menu de interação com o jogador:
+-personalizacao da plataforma(raquete)
+-escolher dificuldade(facil( vida normal do bloco, frequencia normal de poderes; dificil(3x a vida normal do bloco , menor frequencia de spaw de poderes)
+-jogar
+-ver ranking
+-salvar jogo
+
+HUD: 
+ - TABELA DE PONTUAÇÃO ( CAIXA DE TEXTO DINAMICA NA REGIAO ESQUERDA-SUPERIOR DA TELA) 
+ - Imagem de fundo e musica de fundo
+ - 3 vidas por rodada (CONTAGEM DAS VIDAS EM ALGARIMOS AUXILIADO DE UMA IMAGEM DE CORACAO )
+
+- Os alvos serao estaticos
+- Os alvos: imagens de blocos com niveis de resistencia diferentes
+
+PODERES? 
+
+Espawnarao em pontos aleatorios da tela por um curto periodo de tempo e estarao em movimento.
+Tipos:
+Superforça: tira 2x mais dano do bloco; duração do efeito: 5 segundos
+Supervelocidade: aumenta em 1,5x a velocidade normal da bolinha;duração do efeito: 3,5 segundos
+
+
+
+
+
+ 

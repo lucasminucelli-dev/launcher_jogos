@@ -1,0 +1,6 @@
+Lucas;4
+a;116
+2;95
+eduardo;42
+Teste;147
+AAAAAAA;99

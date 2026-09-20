@@ -1,0 +1,72 @@
+ARCADE 2026 - tela inicial dos jogos
+====================================
+
+COMO ABRIR
+  Dê dois cliques em  Iniciar.bat
+  (ou, no Prompt de Comando:  python launcher.py)
+
+PRIMEIRA VEZ
+  Os jogos precisam do pygame. Se ele ainda não estiver instalado, dê dois
+  cliques em  Instalar_pygame.bat  (precisa de internet).
+  O Arcade avisa com uma faixa laranja no topo se o pygame não for encontrado.
+
+COMO FUNCIONA
+  - Clique no card (ou no botão JOGAR) de um jogo: ele abre.
+  - Clique em outro jogo: o jogo em execução é ENCERRADO POR COMPLETO (inclusive
+    processos filhos) e só depois o novo abre. Nunca há dois jogos ao mesmo tempo.
+  - Ao fechar o jogo (X, ESC...), o Arcade volta para a frente da tela sozinho.
+  - Cada card mostra o RECORDE em destaque (1º lugar) e o 2º e 3º colocados.
+    O placar atualiza sozinho enquanto o jogo roda: terminou uma partida,
+    o número novo aparece na tela inicial.
+  - Fechar a janela do Arcade também encerra o jogo que estiver aberto.
+
+PLACARES (de onde vêm os números)
+  Cada jogo grava um arquivo ranking.txt na sua própria pasta:
+    Dark Neon        TEMPO:12s | KILLS:5      -> mostra kills (e o tempo)
+    Corrida Infinita nome;km                  -> mostra Km
+    Elf Dog Jump     nome;pontos              -> mostra pontos
+    Breakout Arcade  nome;pontos              -> mostra pontos
+
+ADICIONAR UM JOGO NOVO
+  Jeito fácil: extraia o jogo para uma pasta dentro de  jogos\  e clique em
+  "Recarregar (F5)" no Arcade. Ele acha o main.py sozinho (mesmo com pastas
+  duplicadas tipo jogos\labirinto\labirinto\main.py) e, se existir um
+  ranking.txt no formato acima, já mostra o placar.
+  Para usar um ícone: coloque icones\NOME_DA_PASTA.png (ideal: 160x160 px).
+
+  Jeito completo: edite o jogos.json (um bloco por jogo):
+    "id"        nome curto, sem espaços
+    "nome"      título exibido
+    "descricao" frase curta
+    "pasta"     pasta do jogo (a partir da pasta do Arcade)
+    "entrada"   arquivo .py que inicia o jogo (dentro da pasta)
+    "icone"     imagem PNG (opcional)
+    "cor"       cor do card, ex. "#ff3fa4" (opcional)
+    "pontuacao" { "arquivo": "ranking.txt",
+                  "formato": "nome;pontos" | "tempo_kills" | "auto",
+                  "unidade": "pts" }   (opcional)
+
+O QUE FOI ALTERADO NOS SEUS JOGOS
+  Só um arquivo: jogos\corrida\jogo_ranking.py (Corrida Infinita).
+  O ranking dele ficava só na memória e sumia ao fechar o jogo, então o Arcade
+  não tinha o que mostrar. Agora ele lê/grava jogos\corrida\ranking.txt.
+  A cópia original está em jogos\corrida\jogo_ranking.py.bak
+  Os demais jogos estão exatamente como você enviou (sem .venv/__pycache__).
+
+  Dark Neon: o Arcade abre o main2.py (a versão que salva ranking). O main.py
+  continua na pasta; para usá-lo, troque "entrada" no jogos.json (ele não salva
+  pontuação).
+
+SE ALGO DER ERRADO
+  - Rode  python launcher.py --check  : mostra Python, pygame, jogos e placares.
+  - Se um jogo fechar com erro, o Arcade mostra as últimas linhas do erro.
+    O log completo de cada jogo fica em  logs\NOME_DO_JOGO.log
+  - Erros do próprio Arcade: logs\launcher_erro.log
+  - "Falta instalar o módulo X": rode  python -m pip install X
+
+OPCIONAL: VIRAR .EXE
+  pip install pyinstaller
+  pyinstaller --onefile --noconsole --name Arcade2026 launcher.py
+  Copie dist\Arcade2026.exe para a pasta do Arcade (junto de jogos.json, jogos\
+  e icones\). Mesmo assim o Python e o pygame precisam estar instalados: são
+  eles que executam os jogos. (Este passo não faz parte do teste automatizado.)
