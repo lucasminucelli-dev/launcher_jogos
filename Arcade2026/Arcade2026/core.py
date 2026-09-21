@@ -266,6 +266,20 @@ def _parse_nome_pontos(linhas: List[str]) -> List[Registro]:
     return regs
 
 
+def _parse_tab_nome_pontos(linhas: List[str]) -> List[Registro]:
+    regs = []
+    for linha in linhas:
+        campos = linha.rstrip("\r\n").split("\t")
+        if len(campos) < 2:
+            continue
+        try:
+            regs.append(Registro(valor=int(campos[1].strip()), nome=campos[0].strip()))
+        except ValueError:
+            continue
+    regs.sort(key=lambda r: r.valor, reverse=True)
+    return regs
+
+
 def _parse_tempo_kills(linhas: List[str]) -> List[Registro]:
     regs = []
     for linha in linhas:
@@ -317,9 +331,16 @@ def ler_placar(jogo: Jogo) -> Placar:
     if formato == "auto":
         if any(_RE_TEMPO_KILLS.search(l) for l in linhas):
             formato, unidade = "tempo_kills", ("kills" if unidade == "pts" else unidade)
+        elif any("\t" in l for l in linhas):
+            formato = "tab_nome_pontos"
         else:
             formato = "nome;pontos"
-    regs = _parse_tempo_kills(linhas) if formato == "tempo_kills" else _parse_nome_pontos(linhas)
+    if formato == "tempo_kills":
+        regs = _parse_tempo_kills(linhas)
+    elif formato == "tab_nome_pontos":
+        regs = _parse_tab_nome_pontos(linhas)
+    else:
+        regs = _parse_nome_pontos(linhas)
     return Placar(regs, unidade=unidade, tem_config=True, arquivo_existe=True)
 
 
