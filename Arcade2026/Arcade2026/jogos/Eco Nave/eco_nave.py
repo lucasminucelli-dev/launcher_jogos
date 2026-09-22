@@ -58,7 +58,7 @@ PLATE_H = 46                     # placa com o nome da lixeira
 PLATE_Y = H - PLATE_H - 8
 BIN_BODY_TOP = PLATE_Y - 4 - 80  # topo do corpo da lixeira
 BIN_MOUTH_Y = BIN_BODY_TOP - 6   # boca da lixeira
-SHIP_Y = 80
+SHIP_Y = 100
 
 START_LIVES = 3
 MAX_LIVES = 5
