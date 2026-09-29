@@ -12,7 +12,6 @@ Só usa a biblioteca padrão do Python.
 from __future__ import annotations
 
 import json
-import csv
 import os
 import re
 import shutil
@@ -267,10 +266,10 @@ def _parse_nome_pontos(linhas: List[str]) -> List[Registro]:
     return regs
 
 
-def _parse_tsv_nome_pontos(linhas: List[str]) -> List[Registro]:
+def _parse_tab_nome_pontos(linhas: List[str]) -> List[Registro]:
     regs = []
     for linha in linhas:
-        campos = next(csv.reader([linha], delimiter="\t"), [])
+        campos = linha.rstrip("\r\n").split("\t")
         if len(campos) < 2:
             continue
         try:
@@ -332,14 +331,14 @@ def ler_placar(jogo: Jogo) -> Placar:
     if formato == "auto":
         if any(_RE_TEMPO_KILLS.search(l) for l in linhas):
             formato, unidade = "tempo_kills", ("kills" if unidade == "pts" else unidade)
-        elif any(len(next(csv.reader([l], delimiter="\t"), [])) >= 2 for l in linhas):
-            formato = "tsv_nome_pontos"
+        elif any("\t" in l for l in linhas):
+            formato = "tab_nome_pontos"
         else:
             formato = "nome;pontos"
     if formato == "tempo_kills":
         regs = _parse_tempo_kills(linhas)
-    elif formato == "tsv_nome_pontos":
-        regs = _parse_tsv_nome_pontos(linhas)
+    elif formato == "tab_nome_pontos":
+        regs = _parse_tab_nome_pontos(linhas)
     else:
         regs = _parse_nome_pontos(linhas)
     return Placar(regs, unidade=unidade, tem_config=True, arquivo_existe=True)

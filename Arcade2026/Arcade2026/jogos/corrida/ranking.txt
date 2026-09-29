@@ -1,1 +1,3 @@
 Lucas;60
+Lucas;0
+Lucas;19
